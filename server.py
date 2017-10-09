@@ -5,7 +5,10 @@ app.secret_key = 'aSecret'
 
 @app.route('/')
 def indexPage():
-    session['count'] += 1
+    if 'count' not in session:
+        session['count'] = 0
+    else:
+        session['count'] += 1
     return render_template('index.html')
 @app.route('/reset', methods=['POST'])
 def resetCount():
